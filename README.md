@@ -167,5 +167,3 @@ Feel free to contribute by:
 This project is for educational purposes. Please respect the licenses of the underlying models and datasets used.
 
 ---
-
-**Happy Learning!**
