@@ -29,7 +29,7 @@ def test_imports():
         'jupyter'
     ]
     
-    print("🧪 Testing package imports...")
+    print("Testing package imports...")
     failed_imports = []
     
     for package in required_packages:
@@ -41,16 +41,16 @@ def test_imports():
                 importlib.import_module('dotenv')
             else:
                 importlib.import_module(package)
-            print(f"✅ {package}")
+            print(f"[PASS] {package}")
         except ImportError as e:
-            print(f"❌ {package}: {e}")
+            print(f"[FAIL] {package}: {e}")
             failed_imports.append(package)
     
     return failed_imports
 
 def test_transformers_basic():
     """Test basic transformers functionality"""
-    print("\n🤖 Testing Transformers functionality...")
+    print("\nTesting Transformers functionality...")
     try:
         from transformers import pipeline
         
@@ -59,20 +59,20 @@ def test_transformers_basic():
         result = classifier("This is a test message")
         
         if result and len(result) > 0 and 'label' in result[0]:
-            print("✅ Sentiment analysis pipeline working")
+            print("[PASS] Sentiment analysis pipeline working")
             print(f"   Sample result: {result[0]['label']} ({result[0]['score']:.3f})")
             return True
         else:
-            print("❌ Unexpected result format")
+            print("[FAIL] Unexpected result format")
             return False
             
     except Exception as e:
-        print(f"❌ Transformers test failed: {e}")
+        print(f"[FAIL] Transformers test failed: {e}")
         return False
 
 def test_data_processing():
     """Test basic data processing capabilities"""
-    print("\n📊 Testing data processing...")
+    print("\nTesting data processing...")
     try:
         import pandas as pd
         import numpy as np
@@ -89,22 +89,22 @@ def test_data_processing():
         assert 'text' in df.columns
         assert df['text'].dtype == 'object'
         
-        print("✅ Pandas operations working")
+        print("[PASS] Pandas operations working")
         
         # NumPy operations
         arr = np.array([1, 2, 3, 4, 5])
         assert arr.mean() == 3.0
         
-        print("✅ NumPy operations working")
+        print("[PASS] NumPy operations working")
         return True
         
     except Exception as e:
-        print(f"❌ Data processing test failed: {e}")
+        print(f"[FAIL] Data processing test failed: {e}")
         return False
 
 def test_visualization():
     """Test visualization capabilities"""
-    print("\n📈 Testing visualization...")
+    print("\nTesting visualization...")
     try:
         import matplotlib.pyplot as plt
         import seaborn as sns
@@ -118,28 +118,28 @@ def test_visualization():
         ax.set_title("Test Plot")
         plt.close(fig)  # Don't display, just test
         
-        print("✅ Matplotlib working")
+        print("[PASS] Matplotlib working")
         
         # Test seaborn
         sns.set_style("whitegrid")
-        print("✅ Seaborn working")
+        print("[PASS] Seaborn working")
         
         return True
         
     except Exception as e:
-        print(f"❌ Visualization test failed: {e}")
+        print(f"[FAIL] Visualization test failed: {e}")
         return False
 
 def main():
     """Main test function"""
-    print("🚀 Starting LLM Projects Setup Test")
+    print("Starting LLM Projects Setup Test")
     print("=" * 50)
     
     # Test imports
     failed_imports = test_imports()
     
     if failed_imports:
-        print(f"\n❌ Failed imports: {', '.join(failed_imports)}")
+        print(f"\n[FAIL] Failed imports: {', '.join(failed_imports)}")
         print("Please install missing packages with:")
         print(f"pip install {' '.join(failed_imports)}")
         return False
@@ -157,20 +157,20 @@ def main():
             if test():
                 passed_tests += 1
         except Exception as e:
-            print(f"❌ Test failed with exception: {e}")
+            print(f"[FAIL] Test failed with exception: {e}")
     
     print("\n" + "=" * 50)
-    print(f"📊 Test Results: {passed_tests}/{len(tests) + 1} tests passed")
+    print(f"Test Results: {passed_tests}/{len(tests) + 1} tests passed")
     
     if passed_tests == len(tests) and not failed_imports:
-        print("🎉 All tests passed! Your setup is ready.")
+        print("All tests passed! Your setup is ready.")
         print("\nNext steps:")
         print("1. Open 'Exploring NLP through Hugging Face Transformers Library.ipynb'")
         print("2. Open 'Empathy_Chatbot_Improved.ipynb' for the fine-tuning project")
         print("3. Set up your OpenAI API key in environment variables if needed")
         return True
     else:
-        print("⚠️  Some tests failed. Please check the errors above.")
+        print("Some tests failed. Please check the errors above.")
         return False
 
 if __name__ == "__main__":
